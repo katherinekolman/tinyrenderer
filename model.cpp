@@ -10,7 +10,7 @@
 #include "model.h"
 
 // parses a obj file for the vertices and faces
-Model::Model(const char *filename) : verts(), faces()
+Model::Model(const char *filename) : verts_(), faces_()
 {
     std::ifstream in;
 
