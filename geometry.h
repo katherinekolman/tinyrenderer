@@ -4,6 +4,7 @@
 #include <cmath>
 #include <iostream>
 
+// class for 2D vectors
 template <class t> struct Vec2
 {
     union
@@ -23,6 +24,7 @@ template <class t> struct Vec2
     template <class > friend std::ostream& operator <<(std::ostream& s, Vec2<t>& v);
 };
 
+// class for 3D vectors
 template <class t> struct Vec3
 {
     union

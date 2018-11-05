@@ -73,6 +73,8 @@ int main(int argc, char** argv)
     for (int i = 0; i < model->nfaces(); i++)
     {
         std::vector<int> face = model->face(i);
+
+        // draws a line from a point to the other vertices in the face
         for (int j = 0; j < 3; j++)
         {
             Vec3f v0 = model->vert(face[j]);
