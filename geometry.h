@@ -17,11 +17,13 @@ template <class t> struct Vec2
     Vec2() : u(0), v(0) {}
     Vec2(t _u, t _v) : u(_u), v(_v) {}
     
-    inline Vec2<t> operator +(const Vec2<t> &V) const { return Vec2<t>(u + V.u, v + V.v); }
-    inline Vec2<t> operator -(const Vec2<t> &V) const { return Vec2<t>(u - V.u, v - V.v); }
-    inline Vec2<t> operator *(float f)          const { return Vec2<t>(u * f, v * f); }
+    inline Vec2<t> operator  +(const Vec2<t> &V) const { return Vec2<t>(u + V.u, v + V.v); }
+    inline Vec2<t> operator  -(const Vec2<t> &V) const { return Vec2<t>(u - V.u, v - V.v); }
+    inline Vec2<t> operator  *(float f)          const { return Vec2<t>(u * f, v * f); }
 
     template <class > friend std::ostream& operator <<(std::ostream& s, Vec2<t>& v);
+    template <class > friend bool          operator ==(const Vec2<t>& a, const Vec2<t>& b);
+    template <class > friend bool          operator !=(const Vec2<t>& a, const Vec2<t>& b);
 };
 
 // class for 3D vectors
@@ -50,6 +52,8 @@ template <class t> struct Vec3
     Vec3<t> & normalize(t l=1) { *this = (*this) * (l / norm()); return *this; }
 
     template <class > friend std::ostream& operator <<(std::ostream& s, Vec3<t>& v);
+    template <class > friend bool          operator ==(const Vec3<t>& a, const Vec3<t>& b);
+    template <class > friend bool          operator !=(const Vec3<t>& a, const Vec3<t>& b);
 };
 
 typedef Vec2<float> Vec2f;
@@ -67,6 +71,26 @@ template <class t> std::ostream& operator <<(std::ostream& s, Vec3<t>& v)
 {
     s << "(" << v.x << ", " << v.y << ", " << v.z << ")\n";
     return s;
+}
+
+template <class t> bool operator ==(const Vec2<t>& a, const Vec2<t>& b)
+{
+    return (a.x == b.x) && (a.y == b.y);
+}
+
+template <class t> bool operator !=(const Vec2<t>& a, const Vec2<t>& b)
+{
+    return !((a.x == b.x) && (a.y == b.y));
+}
+
+template <class t> bool operator ==(const Vec3<t>& a, const Vec3<t>& b)
+{
+    return (a.x == b.x) && (a.y == b.y) && (a.z == b.z);
+}
+
+template <class t> bool operator !=(const Vec3<t>& a, const Vec3<t>& b)
+{
+    return !((a.x == b.x) && (a.y == b.y) && (a.z == b.z));
 }
 
 
