@@ -9,6 +9,7 @@
 const TGAColor white = TGAColor(255, 255, 255, 255);
 const TGAColor red   = TGAColor(255, 0,   0,   255);
 const TGAColor green = TGAColor(0,   255, 0,   255);
+Model *model = NULL;
 const int width  = 200;
 const int height = 200;
 
@@ -51,12 +52,45 @@ void triangle(Vec2i *pts, TGAImage &image, TGAColor color) {
 } 
  
 int main(int argc, char** argv) { 
-    TGAImage frame(200, 200, TGAImage::RGB); 
+    if (argc == 2)
+    {
+        model = new Model(argv[1]);
+    }
+    else
+    {
+        model = new Model("obj/african_head.obj");
+    }
 
-    Vec2i pts[3] = {Vec2i(10,10), Vec2i(100, 30), Vec2i(190, 160)}; 
-    triangle(pts, frame, red); 
+    TGAImage image(width, height, TGAImage::RGB);
+    Vec3f lightDir(0,0,-1); // the direction the light is coming from
 
-    frame.flip_vertically(); // to place the origin in the bottom left corner of the image 
-    frame.write_tga_file("framebuffer.tga");
-    return 0; 
+    for (int i = 0; i < model->nfaces(); i++) 
+    { 
+        std::vector<int> face = model->face(i); 
+        Vec3f worldCoords[3];  // 3D world around model
+        Vec2i screenCoords[3]; // coords for 2D screen
+    
+        for (int j = 0; j < 3; j++) 
+        { 
+            Vec3f v = model->vert(face[j]);
+            screenCoords[j] = Vec2i((v.x + 1.0) * width / 2.0, (v.y + 1.0) * height / 2.0);
+            worldCoords[j] = v;
+        } 
+
+        Vec3f n = (worldCoords[2] - worldCoords[0]) ^ (worldCoords[1] - worldCoords[0]);
+        n.normalize();
+
+        // intensity is the product of the light direction and normal vector of faces
+        float intensity = n * lightDir;
+
+        if (intensity > 0)
+        {
+            triangle(screenCoords, image, TGAColor(intensity * 255, intensity * 255, intensity * 255, 255)); 
+        }
+    }
+
+    image.flip_vertically();
+    image.write_tga_file("output.tga");
+    delete model;
+    return 0;
 }
