@@ -73,6 +73,7 @@ template <class t> std::ostream& operator <<(std::ostream& s, Vec3<t>& v)
     return s;
 }
 
+// comparison operators
 template <class t> bool operator ==(const Vec2<t>& a, const Vec2<t>& b)
 {
     return (a.x == b.x) && (a.y == b.y);
