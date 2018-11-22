@@ -7,7 +7,8 @@ I'll be documenting what I've learned here.
 ## Concepts Learned
 * Lesson 1: Bresenham's Line Drawing Algorithm
   - approximates a pixel line from one point to another using the point-slope formula + error bounds on y
-  - uses y-value error bound to determine which pixel to color  - reading and processing .obj files to make wireframe models
+  - uses y-value error bound to determine which pixel to color  
+  - reading and processing .obj files to make wireframe models
 
 * Lesson 2: Triangle rasterization and back-face culling
   - how to draw a triangle to the screen:
