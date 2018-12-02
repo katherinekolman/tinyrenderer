@@ -16,7 +16,10 @@ I'll be documenting what I've learned here.
      - new, simple way: use barycentric coordinates to calculate whether a pixel in a set bounding box is within the triangle
        - if none of the coordinates are negative, then the pixel is within the triangle 
   - back-face culling: don't light the triangles that aren't visible
-     - calculating the intensity: dot product of light vector and triangle's normal vector  
+     - calculating the intensity of the light: dot product of light vector and triangle's normal vector  
 
 * Lesson 3: Hidden faces removal (z-buffer)
+  - painter's algorithm doesn't work for everything
+  - for 2D: use y-buffer to render things
+    - render the things closest to the camera
 

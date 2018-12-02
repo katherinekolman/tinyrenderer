@@ -2,6 +2,7 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
+#include <limits>
 #include "tgaimage.h"
 #include "model.h"
 #include "geometry.h"
@@ -155,8 +156,10 @@ void triangle(Vec2i *pts, TGAImage &image, TGAColor color)
     } 
 } 
  
+// draws pixels onto image 
 void rasterize(Vec2i p0, Vec2i p1, TGAImage &image, TGAColor color, int* ybuffer)
 {
+    // go from left to right
     if (p0.x > p1.x)
     {
         std::swap(p0, p1);
@@ -166,6 +169,9 @@ void rasterize(Vec2i p0, Vec2i p1, TGAImage &image, TGAColor color, int* ybuffer
     {
         float t = (x - p0.x) / (float)(p1.x - p0.x);
         int y = p0.y * (1. - t) + p1.y * t;
+
+        // if the pixel we're trying to draw on image is closer to
+        // the camera, draw this pixel instead
         if (ybuffer[x] < y)
         {
             ybuffer[x] = y;
@@ -184,7 +190,7 @@ int main(int argc, char** argv)
     line(Vec2i(120, 434), Vec2i(444, 400), scene, green);
     line(Vec2i(330, 463), Vec2i(594, 200), scene, blue);
 
-    // screen line
+    // screen line behind the triangles
     line(Vec2i(10, 10), Vec2i(790, 10), scene, white);
 
     scene.flip_vertically();
