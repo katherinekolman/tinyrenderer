@@ -1,10 +1,11 @@
 # tinyrenderer
 
-This is my attempt at recreating ssloy's tinyrenderer (put link here).
-I'll be documenting what I've learned here.
+This is my attempt at recreating ssloy's [tinyrenderer](https://github.com/ssloy/tinyrenderer). Still a work in progress.
+
+This is mostly just out of curiousity + to learn a little more about graphics and some of the mechanisms behind how things works.
 
 
-## Concepts Learned
+## Concepts Learned (notes for self really)
 * Lesson 1: Bresenham's Line Drawing Algorithm
   - approximates a pixel line from one point to another using the point-slope formula + error bounds on y
   - uses y-value error bound to determine which pixel to color  
@@ -20,6 +21,7 @@ I'll be documenting what I've learned here.
 
 * Lesson 3: Hidden faces removal (z-buffer)
   - painter's algorithm doesn't work for everything
+    - painter's algorithm: drawing things from back to front
   - for 2D: use y-buffer to render things
     - render the things closest to the camera
 
