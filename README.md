@@ -2,7 +2,7 @@
 
 This is my attempt at recreating ssloy's [tinyrenderer](https://github.com/ssloy/tinyrenderer). Still a work in progress.
 
-This is mostly just out of curiousity + to learn a little more about graphics and some of the mechanisms behind how things works.
+This is mostly just out of curiousity + to learn a little more about graphics and some of the mechanisms behind how things work.
 
 
 ## Concepts Learned (notes for self really)
